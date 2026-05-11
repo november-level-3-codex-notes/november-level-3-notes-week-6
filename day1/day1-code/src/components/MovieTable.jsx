@@ -1,8 +1,9 @@
-import React from "react";
-import "./MovieTable.css";
+import React from 'react'
 
 function MovieTable() {
-  return <div>MovieTable</div>;
+  return (
+    <div>MovieTable</div>
+  )
 }
 
-export default MovieTable;
+export default MovieTable

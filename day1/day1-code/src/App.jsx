@@ -1,8 +1,11 @@
-import React from "react";
+import { useEffect, useState } from "react";
+import { supabase } from "./utils/supabase";
 import "./App.css";
 
 function App() {
-  return <div>App</div>;
+  return (
+    <div>App</div>
+  )
 }
 
-export default App;
+export default App
