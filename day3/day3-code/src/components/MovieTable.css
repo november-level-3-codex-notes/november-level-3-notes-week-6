@@ -1,0 +1,67 @@
+.movie-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.movie-table th,
+.movie-table td {
+  border: 1px solid #ccc;
+  padding: 12px;
+  text-align: left;
+}
+
+.movie-table th {
+  background-color: #222;
+  color: white;
+}
+
+.movie-table tr{
+  cursor: pointer;
+}
+
+.movie-table tr:nth-child(even) {
+  background-color: #f4f4f4;
+}
+
+.movie-table tr:hover {
+  background-color: #e8f0ff;
+}
+
+.clickable-row {
+  cursor: pointer;
+}
+
+.details-row td {
+  background-color: #f9f9f9;
+  font-style: italic;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  min-width: 350px;
+  position: relative;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
