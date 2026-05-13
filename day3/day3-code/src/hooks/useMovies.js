@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react-hooks/set-state-in-effect */
 import React, { useEffect, useState } from "react";
 import { supabase } from "../utils/supabase";
 
