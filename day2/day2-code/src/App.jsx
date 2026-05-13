@@ -1,50 +1,37 @@
-import { useEffect, useState } from "react";
-import { supabase } from "./utils/supabase";
+import { useState } from "react";
 import MovieTable from "./components/MovieTable";
 import Pagination from "./components/Pagination";
 import MovieForm from "./components/MovieForm";
+import useMovies from "./hooks/useMovies";
+import AuthForm from "./components/AuthForm";
+import AddMovieForm from "./components/AddMovieForm";
 import "./App.css";
 
+const PAGE_SIZE = 10;
+
 function App() {
-  const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(0);
-  const [numberOfPages, setNumberOfPages] = useState(0);
-  const [loading, setLoading] = useState(false);
   const [genre, setGenre] = useState("");
-  const pageSize = 10;
-
-  useEffect(() => {
-    async function getMovies() {
-      setLoading(true);
-
-      const from = page * pageSize;
-      const to = from + pageSize - 1;
-
-      let query = supabase
-        .from("movies")
-        .select("*", { count: "exact" })
-        .range(from, to);
-
-      if (genre) {
-        query = query.eq("genre", genre);
-      }
-
-      const { data, count } = await query;
-
-      setNumberOfPages(Math.ceil(count / pageSize) - 1);
-      setMovies(data);
-      setLoading(false);
-    }
-
-    getMovies();
-  }, [page, genre]);
+  const { movies, numberOfPages, loading } = useMovies(page, genre);
+  const [currentUser, setCurrentUser] = useState(null);
 
   return (
     <div className="app">
       <h1>Movie List</h1>
-      <MovieForm setGenre={setGenre} />
-      <MovieTable movies={movies} loading={loading} pageSize={pageSize} />
-      <Pagination setPage={setPage} page={page} numberOfPages={numberOfPages} />
+      <AuthForm setCurrentUser={setCurrentUser} currentUser={currentUser} />
+
+      {currentUser && (
+        <>
+          <AddMovieForm />
+          <MovieForm setGenre={setGenre} />
+          <MovieTable movies={movies} loading={loading} pageSize={PAGE_SIZE} />
+          <Pagination
+            setPage={setPage}
+            page={page}
+            numberOfPages={numberOfPages}
+          />
+        </>
+      )}
     </div>
   );
 }
